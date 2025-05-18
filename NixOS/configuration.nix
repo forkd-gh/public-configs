@@ -108,6 +108,7 @@
     neofetch
     wofi # Hyprland
     xfce.thunar # Hyprland
+    wezterm
   ];
 
   # OpenSSH daemon.
