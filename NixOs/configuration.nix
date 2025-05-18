@@ -106,7 +106,8 @@
     obs-studio    
     btop
     neofetch
-    wofi
+    wofi # Hyprland
+    xfce.thunar # Hyprland
   ];
 
   # OpenSSH daemon.
