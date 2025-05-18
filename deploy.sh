@@ -20,6 +20,9 @@ UNMOD_ARRAY=()
 #--------------------------------------------------------------------
 # Required Directory Variables
 REPO="/home/$USER/Github/public-configs"
+WINDOWMANAGER="$REPO/WindowManager"
+MENU="$REPO/MENU"
+TERMINALEMULATOR="$REPO/TerminalEmulator"
 CONF="/home/$USER/.config"
 
 #--------------------------------------------------------------------
@@ -28,7 +31,7 @@ NIXOS_CONF_OVERRIDE="true" # "true" to enable nixos config overriding
 
 ### NIXOS Configs (Except user-configuraton.nix)
 NIXOS_DICT+=(
-    ["$REPO/NixOs/configuration.nix"]="/etc/nixos/configuration.nix"
+    ["$REPO/NixOS/configuration.nix"]="/etc/nixos/configuration.nix"
 )
 
 #--------------------------------------------------------------------
@@ -37,9 +40,14 @@ CONF_OVERRIDE="true" # "true" to general config overriding
 
 ### Other Configs to Deploy - Value must include filename
 CONF_DICT+=(
-    ["$REPO/Hyprland/hyprland.conf"]="$CONF/hypr/hyprland.conf"
-    ["$REPO/Hyprland/menu-toggle.sh"]="$CONF/hypr/menu-toggle.sh"
-    ["$REPO/Hyprland/kitty.conf"]="$CONF/kitty/kitty.conf"
+    # WindowManager
+    ["$WINDOWMANAGER/Hyprland/hyprland.conf"]="$CONF/hypr/hyprland.conf"
+    
+    # TerminalEmulator
+    ["$TERMINALEMULATOR/kitty/kitty.conf"]="$CONF/kitty/kitty.conf"
+    
+    # Menu
+    ["$MENU/wofi/menu-toggle.sh"]="$CONF/wofi/menu-toggle.sh"
 )
 
 #--------------------------------------------------------------------
@@ -54,7 +62,7 @@ if [ "$USER" == "root" ]; then
 fi
 
 #--------------------------------------------------------------------
-# NixOs Deployment (If required)
+# NixOS Deployment (If required)
 if [ "$NIXOS_CONF_OVERRIDE" == "true" ]; then
     if grep -qi '^ID=nixos' /etc/os-release; then
 
@@ -75,16 +83,16 @@ if [ "$NIXOS_CONF_OVERRIDE" == "true" ]; then
             fi
         done
 
-        creation_message="WARNING: To Make NixOs Config Changes, Modify: /etc/nixos/user-configuration.nix"
+        creation_message="WARNING: To Make NixOS Config Changes, Modify: /etc/nixos/user-configuration.nix"
         if [ ! -f /etc/nixos/user-configuration.nix ]; then
-            sudo cp "$REPO/NixOs/user-configuration.nix" /etc/nixos/user-configuration.nix
+            sudo cp "$REPO/NixOS/user-configuration.nix" /etc/nixos/user-configuration.nix
             
-            echo "WARNING: NixOs User Conf Did Not Exist"
+            echo "WARNING: NixOS User Conf Did Not Exist"
             echo "$creation_message"
 
             CREATED_ARRAY+=("/etc/nixos/user-configuration.nix")
         else
-            TEMPLATE_HASH=$(md5sum "$REPO/NixOs/user-configuration.nix" | awk '{print $1}')
+            TEMPLATE_HASH=$(md5sum "$REPO/NixOS/user-configuration.nix" | awk '{print $1}')
             EXISTING_HASH=$(sudo md5sum /etc/nixos/user-configuration.nix | awk '{print $1}')
             
             if [ "$TEMPLATE_HASH" == "$EXISTING_HASH" ]; then
