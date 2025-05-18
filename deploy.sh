@@ -3,7 +3,7 @@
 #####################################################################
 # 
 # DESC:
-#   An overly comprehensice bash script to deploy files from 
+#   An overly comprehensive bash script to deploy files from 
 #   this repo to their desired configuration location and then
 #   run commands to load those files as required.
 #
