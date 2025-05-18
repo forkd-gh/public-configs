@@ -106,6 +106,7 @@
     obs-studio    
     btop
     neofetch
+    wofi
   ];
 
   # OpenSSH daemon.
