@@ -1,3 +1,10 @@
 dynamic_lines=true
 gtk_dark=true
 terminal=kitty
+width=350
+height=500
+mode=drun
+menu_mode=normal
+allow_images=true
+image_size=22
+

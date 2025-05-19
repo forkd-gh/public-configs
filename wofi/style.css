@@ -1,0 +1,55 @@
+window {
+    font-family: "DejaVuSansMono", monospace;
+    font-weight: bold;
+    color: rgb(206, 203, 203);
+    border: 1px solid rgb(0, 167, 223);
+    background-color: black;
+    border-radius: 10px;
+}
+
+
+#input {
+    margin: 0.2em;
+    color: rgb(0, 255, 0);
+    border-radius: 8px;
+    background-color: rgba(75, 78, 255, 0.15);
+    border: 1px solid rgb(0, 167, 223);
+    font-size: 16;
+}
+
+#inner-box {
+    margin: 2px;
+    border: none;
+}
+
+#outer-box {
+    margin: 2px;
+    border: none;
+    margin-top: 0.25em;
+    margin-bottom: 0.3em;
+}
+
+#text {
+    margin: 2px;
+    border: none;
+    align-items: center;
+}
+
+
+
+#entry:selected {
+    margin: 0.2em;
+    color: rgb(0, 255, 0);
+    border-radius: 8px;
+    background-color: rgba(75, 78, 255, 0.15);
+    border: 1px solid rgb(0, 167, 223);
+}
+
+image {
+    margin: 0.25em;
+}
+
+.submenu-icon {
+    display: none;
+}
+  
