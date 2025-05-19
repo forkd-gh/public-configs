@@ -3,69 +3,47 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/vars.sh"
 
-### Configs to Symlink
-declare -A CONF_DICT+=(
-    # NixOS
-    ["$REPO/NixOS/configuration.nix"]="/etc/nixos"
-
-    # WindowManager
-    ["$REPO/hypr/hyprland.conf"]="$CONF/hypr"
-    
-    # TerminalEmulator
-    ["$REPO/kitty/kitty.conf"]="$CONF/kitty"
-    
-    # Menu
-    ["$REPO/wofi/menu-toggle.sh"]="$CONF/wofi"
+#---------------------------------------------------------------
+# 📁 Declare source → destination folder mappings
+declare -A CONF_DICT=(
+    ["$REPO/nixos"]="/etc/nixos"
+    ["$REPO/hypr"]="$CONF/hypr"
+    ["$REPO/kitty"]="$CONF/kitty"
+    ["$REPO/wofi"]="$CONF/wofi"
 )
 
-#--------------------------------------------------------------------
+#---------------------------------------------------------------
 
 if [ "$(logname)" == "root" ]; then
-    echo "It is not recommended to run this directly as root."
-    echo "The script will ask for permission when required."
+    echo "❌ Don't run this directly as root. The script will use sudo when needed."
     exit 1
 fi
 
-echo "🔗 Creating symlinks..."
+echo "🔗 Linking configuration folders..."
 
 for SRC in "${!CONF_DICT[@]}"; do
-    DST_DIR="${CONF_DICT[$SRC]}"
-    FILE_NAME=$(basename "$SRC")
-    DST_PATH="$DST_DIR/$FILE_NAME"
+    DST="${CONF_DICT[$SRC]}"
 
-    echo "→ Linking $SRC → $DST_PATH"
-
-    USE_SUDO=""
-    if [[ "$DST_PATH" == /etc/* ]]; then
-        USE_SUDO="sudo"
-    fi
-
-    $USE_SUDO mkdir -p "$DST_DIR"
-
-    # Check if symlink is already correct
-    if [ -L "$DST_PATH" ] && [ "$(readlink "$DST_PATH")" = "$SRC" ]; then
-        echo "✔️  Symlink already correct: $DST_PATH"
+    if [ ! -d "$SRC" ]; then
+        echo "❌ Source folder does not exist: $SRC"
         continue
     fi
 
-    if [ -e "$DST_PATH" ] || [ -L "$DST_PATH" ]; then
-        echo "⚠️  Removing existing file/link at $DST_PATH"
-        $USE_SUDO rm -rf "$DST_PATH"
-    fi
+    USE_SUDO=""
+    [[ "$DST" == /etc/* ]] && USE_SUDO="sudo"
 
-    $USE_SUDO ln -s "$SRC" "$DST_PATH"
-    echo "✅ Linked $SRC to $DST_PATH"
+    echo "→ Linking $SRC → $DST"
+    $USE_SUDO rm -rf "$DST"
+    $USE_SUDO ln -s "$SRC" "$DST"
+    echo "✅ Linked $DST"
 done
 
-echo "✅ All done!"
+#---------------------------------------------------------------
+if command -v hyprctl &> /dev/null && pgrep Hyprland &> /dev/null; then
+    hyprctl reload &> /dev/null
+fi
 
-echo "Reloading Hyprland"
-hyprctl reload
-
-echo ""
-echo "REMINDER: 1. Some changes may require a restart or a logout to take effect."
-echo "          2. This script does not rebuild NixOS."
-echo ""
-echo "Script Execution Complete - Have a nice day"
+echo -e "\n✅ All symlinks created!"
+echo "ℹ️ Reminder: some changes require a logout or restart."
 
 #--------------------------------------------------------------------
