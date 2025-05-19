@@ -7,4 +7,5 @@ mode=drun
 menu_mode=normal
 allow_images=true
 image_size=22
-
+hide_search=false
+prompt= #Blank Prompt
