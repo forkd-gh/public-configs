@@ -16,11 +16,11 @@ declare -A CONF_DICT=(
 #---------------------------------------------------------------
 
 if [ "$(logname)" == "root" ]; then
-    echo "❌ Don't run this directly as root. The script will use sudo when needed."
+    echo "WARNING: Don't run this directly as root. The script will use sudo when needed."
     exit 1
 fi
 
-echo "🔗 Linking configuration folders..."
+echo "Linking configuration folders..."
 
 for SRC in "${!CONF_DICT[@]}"; do
     DST="${CONF_DICT[$SRC]}"
@@ -44,7 +44,7 @@ if command -v hyprctl &> /dev/null && pgrep Hyprland &> /dev/null; then
     hyprctl reload &> /dev/null
 fi
 
-echo -e "\n✅ All symlinks created!"
-echo "ℹ️ Reminder: some changes require a logout or restart."
+echo -e "\nAll symlinks created!"
+echo "Reminder: some changes require a logout or restart."
 
 #--------------------------------------------------------------------
