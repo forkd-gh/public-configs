@@ -62,6 +62,7 @@ echo "✅ All done!"
 echo "Reloading Hyprland"
 hyprctl reload
 
+echo ""
 echo "REMINDER: 1. Some changes may require a restart or a logout to take effect."
 echo "          2. This script does not rebuild NixOS."
 echo ""
