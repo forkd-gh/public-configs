@@ -1,4 +1,3 @@
-# /etc/nixos/user-configuration.nix
 { config, pkgs, ... }:
 
 {
