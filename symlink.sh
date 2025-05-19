@@ -10,6 +10,7 @@ declare -A CONF_DICT=(
     ["$REPO/hypr"]="$CONF/hypr"
     ["$REPO/kitty"]="$CONF/kitty"
     ["$REPO/wofi"]="$CONF/wofi"
+    ["$REPO/neofetch"]="$CONF/neofetch"
 )
 
 #---------------------------------------------------------------
