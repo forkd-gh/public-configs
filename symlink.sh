@@ -11,6 +11,7 @@ declare -A CONF_DICT=(
     ["$REPO/kitty"]="$CONF/kitty"
     ["$REPO/wofi"]="$CONF/wofi"
     ["$REPO/neofetch"]="$CONF/neofetch"
+    ["$REPO/Thunar"]="$CONF/Thunar"
 )
 
 #---------------------------------------------------------------
