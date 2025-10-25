@@ -1,8 +1,8 @@
 window {
     font-family: "DejaVuSansMono", monospace;
     font-weight: bold;
-    color: rgb(206, 203, 203);
-    border: 1px solid rgb(0, 167, 223);
+    color: white;
+    border: 1px solid white;
     background-color: black;
     border-radius: 10px;
 }
@@ -11,8 +11,8 @@ window {
 #input {
     margin: 0.2em;
     border-radius: 8px;
-    background-color: rgba(75, 78, 255, 0.15);
-    border: 1px solid rgb(0, 167, 223);
+    background-color: #3a3a3a;
+    border: 1px solid white;
     font-size: 16;
 }
 
@@ -37,8 +37,8 @@ window {
 #entry:selected {
     margin: 0.2em;
     border-radius: 8px;
-    background-color: rgba(75, 78, 255, 0.15);
-    border: 1px solid rgb(0, 167, 223);
+    background-color: #3a3a3a;
+    border: 1px solid white;
 }
 
 image {

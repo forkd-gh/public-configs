@@ -1,0 +1,102 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 32,
+  "margin-bottom": 8,
+  "modules-left": ["custom/power", "custom/thunar", "custom/1password", "custom/bar","hyprland/workspaces"],
+  "modules-center": [],
+  "modules-right": ["battery", "pulseaudio", "custom/blueman", "network", "custom/bar", "clock"],
+
+  "hyprland/workspaces": {
+    "on-click": "~/.config/waybar/scripts/switch_workspace.sh {id}",
+    "all-outputs": true
+  },
+  "clock": {
+    "format": "{:%b %d %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "Google Calendar {:%Y-%m-%d}",
+    "on-click": "firefox --new-window https://calendar.google.com/calendar"
+  },
+  "pulseaudio": {
+    "format": "{volume} {icon}",
+    "format-muted": "Muted ",
+    "format-icons": {
+      "default": [""],
+      "muted": [""]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/blueman": {
+    "exec": "echo \"󰂯\"",
+    "tooltip": true,
+    "tooltip-format": "Blueman Manager",
+    "on-click": "blueman-manager",
+    "interval": 0
+  },
+  "custom/thunar": {
+    "exec": "echo \"\"",
+    "tooltip": true,
+    "tooltip-format": "File Manager",
+    "on-click": "thunar",
+    "interval": 0
+  },
+  "custom/1password": {
+    "exec": "echo \"󰢁\"",
+    "tooltip": true,
+    "tooltip-format": "Password Manager",
+    "on-click": "1password",
+    "interval": 0
+  },
+  "custom/bar": {
+    "exec": "echo \"|\"",
+    "tooltip": false,
+    "interval": 0
+  },
+  "network": {
+    "format-ethernet": "󰈀",
+    "format-wifi": "",
+    "format-disconnected": "⚠",
+    "tooltip-format": "{ipaddr}",
+    "format-linked": "⚠",
+    "format-alt": "",
+    "on-click": "nm-connection-editor"
+  },
+  "battery": {
+    "states": {
+        "good": 90,
+        "warning": 40,
+        "critical": 20
+    },
+    "format": "{capacity} {icon}",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+        "󰂎",
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+    ]
+  },
+  "custom/power": {
+    "format" : "",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      "shutdown": "shutdown",
+      "reboot": "reboot",
+      "suspend": "systemctl suspend",
+      "hibernate": "systemctl hibernate"
+    }
+  }
+  
+}

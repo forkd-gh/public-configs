@@ -1,0 +1,14 @@
+command = fish
+
+font-family = "JetBrains Mono"
+font-size = 13.0
+
+foreground = white
+background = black
+
+cursor-color = white
+cursor-style = bar
+shell-integration-features = no-cursor
+
+selection-foreground = black
+selection-background = white
